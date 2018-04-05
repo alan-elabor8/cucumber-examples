@@ -6,6 +6,6 @@ Feature: search Wikipedia
     Then Single result is shown for '<searchTerm>'
 
     Examples:
-      | searchTerm |
-      | Cucumber   |
-      | Cheese     |
+      | searchTerm|
+      | Cucumber  |
+      | Cheese    |

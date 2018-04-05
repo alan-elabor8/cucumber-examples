@@ -11,6 +11,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertFalse;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class WikipediaSteps {
 
     private WebDriver driver;
@@ -44,7 +46,11 @@ public class WikipediaSteps {
                 .findElement(By.cssSelector("div#mw-content-text.mw-content-ltr p"));
         System.out.println(results.getText());
         System.out.println(results.getText().contains(searchResult + " usually refers to:"));
+
+        assertThat(results.getText().contains(searchResult + " usually refers to:")).isFalse();
         assertFalse(results.getText().contains(searchResult + " usually refers to:"));
+
+        assertThat(results.getText().startsWith(searchResult)).isTrue();
         assertTrue(results.getText().startsWith(searchResult));
     }
 }

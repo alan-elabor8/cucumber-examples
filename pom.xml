@@ -10,8 +10,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <cucumber.version>1.2.4</cucumber.version>
-        <selenium.version>2.53.1</selenium.version>
+        <cucumber.version>1.2.5</cucumber.version>
+        <selenium.version>3.11.0</selenium.version>
     </properties>
 
     <build>
@@ -47,5 +47,14 @@
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.9.1</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 </project>

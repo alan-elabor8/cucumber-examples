@@ -3,13 +3,19 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.startsWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,13 +50,17 @@ public class WikipediaSteps {
     public void assertSingleResult(String searchResult) {
         WebElement results = driver
                 .findElement(By.cssSelector("div#mw-content-text.mw-content-ltr p"));
-        System.out.println(results.getText());
-        System.out.println(results.getText().contains(searchResult + " usually refers to:"));
 
-        assertThat(results.getText().contains(searchResult + " usually refers to:")).isFalse();
+        //AssertJ
+        assertThat(results.getText()).doesNotContain(" usually refers to:");
+        assertThat(results.getText()).startsWith(searchResult);
+
+        //Hamcrest
+        assertThat(results.getText(), not(containsString(" usually refers to:")));
+        assertThat(results.getText(), startsWith(searchResult));
+
+        //Junit
         assertFalse(results.getText().contains(searchResult + " usually refers to:"));
-
-        assertThat(results.getText().startsWith(searchResult)).isTrue();
         assertTrue(results.getText().startsWith(searchResult));
     }
 }
